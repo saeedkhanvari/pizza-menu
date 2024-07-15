@@ -1,6 +1,3 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
 const pizzaData = [
   {
     name: "Focaccia",
@@ -45,62 +42,3 @@ const pizzaData = [
     soldOut: false,
   },
 ];
-
-function App() {
-  return (
-    <>
-      <Header />
-      <Menu />
-      <Footer />
-    </>
-  );
-}
-function Pizza() {
-  return (
-    <>
-      <img src="pizzas/spinaci.jpg" alt="#" />
-      <h2>this is pizza component</h2>
-      <p>some domy data</p>
-    </>
-  );
-}
-
-const Header = () => {
-  return (
-    <>
-      <h1>fast react pizza</h1>
-    </>
-  );
-};
-const Menu = () => {
-  return (
-    <>
-      <h2>This is our Menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </>
-  );
-};
-const Footer = () => {
-  const hour = new Date().getHours();
-  const OpenHour = 12;
-  const closeHour = 22;
-  const isOpen = hour >= OpenHour && hour <= closeHour;
-  console.log(isOpen);
-
-  return (
-    <>
-      <footer>{hour}we are currently Open !</footer>
-    </>
-  );
-};
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
