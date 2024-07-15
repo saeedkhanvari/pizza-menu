@@ -57,15 +57,6 @@ function App() {
     </>
   );
 }
-function Pizza() {
-  return (
-    <>
-      <img src="pizzas/spinaci.jpg" alt="#" />
-      <h3>this is pizza component</h3>
-      <p>some domy data</p>
-    </>
-  );
-}
 
 const Header = () => {
   return (
@@ -77,19 +68,47 @@ const Header = () => {
   );
 };
 const Menu = () => {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
   return (
-    <>
-      <main className="menu">
-        <h2>OUR MENU</h2>
-        <Pizza />
-        <Pizza />
-        <Pizza />
-        <Pizza />
-        <Pizza />
-      </main>
-    </>
+    <main className="menu">
+      <h2>OUR MENU</h2>
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((pizza, index) => {
+            const { name, ingredients, photoName, price, soldOut } = pizza;
+            return (
+              <Pizza
+                name={name}
+                ingredients={ingredients}
+                photoName={photoName}
+                price={price}
+                key={index}
+              />
+            );
+          })}
+        </ul>
+      ) : null}
+    </main>
   );
 };
+
+function Pizza(props) {
+  const { name, ingredients, photoName, price } = props;
+  return (
+    <>
+      <li className="pizza">
+        <img src={photoName} alt="#" />
+        <div>
+          <h3>{name}</h3>
+          <p>{ingredients}</p>
+          <span>{parseInt(price) + 3}</span>
+        </div>
+      </li>
+    </>
+  );
+}
+
 const Footer = () => {
   const hour = new Date().getHours();
   const OpenHour = 12;
@@ -99,7 +118,16 @@ const Footer = () => {
 
   return (
     <>
-      <footer className="footer">{hour}we are currently Open !</footer>
+      <footer className="footer">
+        {isOpen && (
+          <div className="order">
+            <p>
+              We're open until {closeHour}:00. come visit us or order online.
+            </p>
+            <button className="btn">Order</button>
+          </div>
+        )}
+      </footer>
     </>
   );
 };
